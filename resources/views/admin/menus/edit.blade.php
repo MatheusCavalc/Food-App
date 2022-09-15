@@ -22,16 +22,22 @@
                                 <input type="text" id="name" name="name" value="{{ $menu->name }}"
                                     class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-400 @enderror" />
                             </div>
+                            @error('name')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         <div class="sm:col-span-6 pt-5">
-                                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                                <div class="mt-1">
-                                    <select id="category" name="category" class="form-multiselect block w-full mt-1">
-                                            <option value="{{ $menu->category }}" selected>{{ $menu->category }}</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->name }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                              <div class="mt-1">
+                                <select id="category" name="category" class="form-multiselect block w-full mt-1">
+                                        <option value="{{ $menu->category }}" selected>{{ $menu->category }}</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('category')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="sm:col-span-6 pt-5">
                             <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
@@ -39,6 +45,9 @@
                                 <textarea id="description" rows="3" name="description"
                                     class="shadow-sm focus:ring-indigo-500 appearance-none bg-white border py-2 px-3 text-base leading-normal transition duration-150 ease-in-out focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('name') border-red-400 @enderror">{{ $menu->description }}</textarea>
                             </div>
+                            @error('description')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="sm:col-span-6">
                             <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
@@ -49,6 +58,9 @@
                                 <input type="file" id="image" name="image"
                                     class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-400 @enderror" />
                             </div>
+                            @error('image')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="sm:col-span-6 pt-5">
                             <label for="size" class="block text-sm font-medium text-gray-700">Size</label>
@@ -60,6 +72,9 @@
                                         <option value="Extra big">Extra Big</option>
                                 </select>
                             </div>
+                            @error('size')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="sm:col-span-6 pt-5">
                             <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
@@ -67,6 +82,9 @@
                                 <input type="number" min="0.00" max="10000.00" step="0.01" id="price" name="price" value="{{ $menu->price }}"
                                     class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
+                            @error('price')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mt-6 p-4">
                             <button type="submit"

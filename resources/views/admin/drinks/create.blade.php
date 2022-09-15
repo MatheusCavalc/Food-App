@@ -21,16 +21,22 @@
                                 <input type="text" id="name" name="name"
                                     class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-400 @enderror" />
                             </div>
+                            @error('name')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         <div class="sm:col-span-6 pt-5">
-                                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                                <div class="mt-1">
-                                    <select id="category" name="category" class="form-multiselect block w-full mt-1">
-                                            <option value="" selected disabled>Select the category</option>
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->name }}">{{ $category->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                            <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                            <div class="mt-1">
+                                <select id="category" name="category" class="form-multiselect block w-full mt-1">
+                                        <option value="" selected disabled>Select the category</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            @error('category')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="sm:col-span-6">
                             <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
@@ -38,6 +44,9 @@
                                 <input type="file" id="image" name="image"
                                     class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('name') border-red-400 @enderror" />
                             </div>
+                            @error('image')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="sm:col-span-6 pt-5">
                             <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
@@ -45,6 +54,9 @@
                                 <input type="number" min="0.00" max="10000.00" step="0.01" id="price" name="price"
                                     class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                             </div>
+                            @error('price')
+                                <div class="text-sm text-red-400">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="mt-6 p-4">
                             <button type="submit"
