@@ -4,6 +4,12 @@
         <h3 class="text-2xl font-bold">Our Menu</h3>
     </div>
 
+    @if (session('message'))
+        <div class="mt-4 text-center">
+            {{ session('message') }}
+        </div>
+    @endif
+
     @foreach ($categories as $category)
         <div class="mt-4 text-center">
             <h2 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500"> {{ $category->name }}</h2>
@@ -25,8 +31,12 @@
                                     <span class="text-xl text-green-600">${{ $menu->price }}</span>
                                 </div>
                                 <div class="flex space-x-2">
-                                    <a href="/"
-                                        class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Pedir</a>
+                                    <form action="{{ route('cart.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" name="menu_id" value="{{ $menu->id }}">
+                                        <span><input type="number" name="quantity" value="1" placeholder="1"></span>
+                                        <button class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white" type="submit">Add to Cart</button>
+                                    </form>
                                 </div>
                             </div>
                         @endif

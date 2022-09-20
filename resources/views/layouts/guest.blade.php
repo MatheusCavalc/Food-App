@@ -16,6 +16,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @livewireStyles
 </head>
 
 <body>
@@ -49,7 +51,7 @@
                 @if (Route::has('login'))
                     @auth
                     <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-                    href="/dashboard">Meus Pedidos</a>
+                    href="{{ route('cart.index') }}">Meus Pedidos ({{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }})</a>
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -74,9 +76,17 @@
             </div>
         </nav>
     </div>
+
+
+
+
     <div class="font-sans text-gray-900 antialiased min-h-screen">
         {{ $slot }}
     </div>
+
+
+
+
     <footer class="bg-gray-800 border-t border-gray-200">
         <div class="container flex flex-wrap items-center justify-center px-4 py-8 mx-auto lg:justify-between">
             <div class="flex flex-wrap justify-center">
@@ -121,25 +131,6 @@
             </div>
         </div>
     </footer>
+    @livewireScripts
     </body>
-
-
-
-
-
-
-
-    <!--                @if (Route::has('login'))
-                    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                            @auth
-                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Meus Pedidos</a>
-                        @else
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                            @endif
-                            @endauth
-                    </div>
-                        @endif -->
 </html>

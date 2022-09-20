@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Menu;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
@@ -14,11 +15,8 @@ class WelcomeController extends Controller
         return view('welcome', compact('menus'));
     }
 
-    public function requestIndex()
+    public function dashboard()
     {
-        $menus = Menu::all();
-        $categories = Category::all();
-
-        return view('request.index', compact('menus', 'categories'));
+        return view('dashboard');
     }
 }
