@@ -23,8 +23,8 @@ Route::get('/', [WelcomeController::class, 'index']);
 
 Route::middleware(['auth'])->name('request.')->prefix('request')->group(function () {
     Route::get('/', [WelcomeController::class, 'requestIndex'])->name('index');
+    Route::get('/cart', [WelcomeController::class, 'cart'])->name('cart');
 });
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -36,5 +36,7 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::resource('/menus', MenuController::class);
     Route::resource('/drinks', DrinkController::class);
 });
+
+Route::get('/admin/requests', [RequestController::class, 'index'])->middleware(['auth', 'admin'])->name('admin.requests.index');
 
 require __DIR__.'/auth.php';

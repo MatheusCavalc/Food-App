@@ -16,6 +16,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @livewireStyles
 </head>
 
 <body>
@@ -49,8 +51,11 @@
                 @if (Route::has('login'))
                     @auth
                     <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-                    href="/dashboard">Meus Pedidos</a>
-
+                    href="{{ route('request.cart') }}">Meus Pedidos ({{ \Gloudemans\Shoppingcart\Facades\Cart::content()->count() }})</a>
+                @if (Auth::user()->admin)
+                    <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                    href="/admin">Admin</a>
+                @endif
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
@@ -121,6 +126,7 @@
             </div>
         </div>
     </footer>
+    @livewireScripts
     </body>
 
 

@@ -12,6 +12,8 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        @livewireStyles
     </head>
     <body class="font-sans antialiased">
         <div class="flex-col w-full md:flex md:flex-row md:min-h-screen">
@@ -34,6 +36,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('admin.drinks.index')" :active="request()->routeIs('admin.drinks.index')">
                             {{ __('Bebidas') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('admin.requests.index')" :active="request()->routeIs('admin.requests.index')">
+                            {{ __('Pedidos') }}
                         </x-nav-link>
                         <div @click.away="open = false" class="relative" x-data="{ open: false }">
                             <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg dark-mode:bg-transparent dark-mode:focus:text-white dark-mode:hover:text-white dark-mode:focus:bg-gray-600 dark-mode:hover:bg-gray-600 md:block hover:text-gray-900 focus:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline">
@@ -61,5 +66,6 @@
                 {{ $slot }}
             </main>
         </div>
+        @livewireScripts
     </body>
 </html>

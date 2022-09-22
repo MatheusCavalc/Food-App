@@ -1,3 +1,3 @@
 <x-guest-layout>
-    @livewire('requests')
+    @livewire('cart-requests')
 </x-guest-layout>
