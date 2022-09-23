@@ -16,6 +16,8 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    @livewireStyles
 </head>
 
 <body>
@@ -48,8 +50,7 @@
                         href="{{ route('request.index') }}">Our Menu</a>
                 @if (Route::has('login'))
                     @auth
-                    <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-                    href="/dashboard">Meus Pedidos</a>
+                    <livewire:cart-counter />
 
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
@@ -121,6 +122,7 @@
             </div>
         </div>
     </footer>
+    @livewireScripts
     </body>
 
 

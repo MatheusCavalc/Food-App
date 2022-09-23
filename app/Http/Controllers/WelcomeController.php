@@ -16,9 +16,6 @@ class WelcomeController extends Controller
 
     public function requestIndex()
     {
-        $menus = Menu::all();
-        $categories = Category::all();
-
-        return view('request.index', compact('menus', 'categories'));
+        return view('request.index');
     }
 }
