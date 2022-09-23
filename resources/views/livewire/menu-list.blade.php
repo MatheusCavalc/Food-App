@@ -3,11 +3,7 @@
         <h3 class="text-2xl font-bold">Our Menu</h3>
     </div>
 
-    @if ($message)
-        <div class="mt-4 text-center">
-            <h3 class="text-2xl font-bold">{{ $message }}</h3>
-        </div>
-    @endif
+    @include('layouts.flash-message')
 
     @foreach ($categories as $category)
         <div class="mt-4 text-center">

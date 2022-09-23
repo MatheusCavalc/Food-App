@@ -9,7 +9,6 @@ use Livewire\Component;
 
 class MenuList extends Component
 {
-    public $message = null;
     public $menu;
 
     public function render()
@@ -29,8 +28,10 @@ class MenuList extends Component
             ];
 
             Shoppingcart::updateOrCreate($data);
+
             $this->emit('updateCartCount');
-            $this->message = 'Menu adcionado';
+
+            session()->flash('success','Product added to the cart successfully');
 
         } else {
             return redirect(route('login'));

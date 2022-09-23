@@ -5,7 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Shoppingcart;
 
-class Cartcounter extends Component
+class CounterCart extends Component
 {
     public $total = 0;
 
@@ -15,7 +15,7 @@ class Cartcounter extends Component
     {
         $this->getCartItemCount();
 
-        return view('livewire.cart-counter');
+        return view('livewire.counter-cart');
     }
 
     public function getCartItemCount(){

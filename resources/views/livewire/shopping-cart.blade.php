@@ -1,5 +1,16 @@
 <div>
     <div class="flex justify-center my-6">
+        <div class="flex flex-col w-full p-8 text-gray-800 md:w-4/5 lg:w-4/5">
+            <div class="flex-1">
+                <a href="{{ route('myorders') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                    Meus Pedidos
+                </a>
+            </div>
+        </div>
+    </div>
+
+    @include('layouts.flash-message')
+    <div class="flex justify-center my-6">
         <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
             <div class="flex-1">
                 <table class="w-full text-sm lg:text-base" cellspacing="0">
@@ -59,8 +70,23 @@
                     </tbody>
                 </table>
                 <hr class="pb-6 mt-6" />
+
+
                 <div class="my-4 mt-6 -mx-2 lg:flex">
-                    <div class="lg:px-2 lg:w-1/2"></div>
+                    <div class="lg:px-2 lg:w-1/2">
+                            <div class="mb-6">
+                            <label for="phone" class="block mb-2 text-sm lg:text-base text-gray-900 dark:text-gray-300">Phone for contact</label>
+                            <input wire:model="phone" type="number" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            @error('phone') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+
+                            <div class="mb-6">
+                            <label for="address" class="block mb-2 text-sm lg:text-base text-gray-900 dark:text-gray-300">Your address</label>
+                            <input wire:model="address" type="text" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                            @error('address') <span class="error">{{ $message }}</span> @enderror
+                            </div>
+                    </div>
+
                     <div class="lg:px-2 lg:w-1/2">
                         <div class="p-4 bg-gray-100 rounded-full">
                             <h1 class="ml-2 font-bold uppercase">Order Details</h1>

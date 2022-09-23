@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Shoppingcart extends Model
+class Order extends Model
 {
     use HasFactory;
 
@@ -16,10 +16,8 @@ class Shoppingcart extends Model
         return $this->belongsTo(Menu::class);
     }
 
-    const STATUS = [
-        'pending'       => 0,
-        'in_process'    => 1,
-        'success'       => 2,
-        'error'         => 3
-    ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }
