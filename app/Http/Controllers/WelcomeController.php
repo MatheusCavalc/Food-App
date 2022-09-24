@@ -10,7 +10,7 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $menus = Menu::all();
+        $menus = Menu::all()->take(4);
         return view('welcome', compact('menus'));
     }
 

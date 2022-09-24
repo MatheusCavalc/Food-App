@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class MyOrders extends Component
 {
-    public $status = "+";
+    public $status = "";
 
     public function render()
     {
@@ -19,9 +19,13 @@ class MyOrders extends Component
         $status = Shoppingcart::where('user_id', auth()->user()->id)
                                 ->where('status', 'success')
                                 ->where('status_delivery', '!=', 'Entregue')
-                                ->first();
+                               ->first();
 
-        $this->status = $status->delivery->status;
+        if ($status != null) {
+            $this->status = $status->status_delivery;
+        } else {
+            $this->status = 'Sem Pedidos';
+        }
 
         return view('livewire.my-orders', compact('myorders'));
     }

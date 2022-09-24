@@ -2,7 +2,7 @@
     <div class="flex justify-center my-6">
         <div class="flex flex-col w-full p-8 text-gray-800 md:w-4/5 lg:w-4/5">
             <div class="flex-1">
-                <a href="{{ route('myorders') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{{ route('myorders') }}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
                     Meus Pedidos
                 </a>
             </div>
