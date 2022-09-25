@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Category;
+use App\Models\Drink;
 use App\Models\Menu;
 use App\Models\Shoppingcart;
 use Livewire\Component;

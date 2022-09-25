@@ -23,28 +23,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index']);
 
-Route::middleware(['auth'])->name('request.')->prefix('request')->group(function () {
-    Route::get('/', [WelcomeController::class, 'requestIndex'])->name('index');
-});
-
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth')->name('dashboard');
-
 Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
     Route::resource('/categories', CategoryController::class);
     Route::resource('/menus', MenuController::class);
-    Route::resource('/drinks', DrinkController::class);
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
 });
     Route::get('/myorders', [OrderController::class, 'myOrders'])->middleware('auth')->name('myorders');
+
 
 
 Route::get('payment-cancel',[PaypalController::class,'cancel'])
     ->name('payment.cancel');
 Route::get('payment-success',[PaypalController::class,'success'])
     ->name('payment.success');
+
+
+
+Route::middleware(['auth'])->name('request.')->prefix('request')->group(function () {
+    Route::get('/', [WelcomeController::class, 'requestIndex'])->name('index');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth')->name('dashboard');
+
 
 require __DIR__.'/auth.php';

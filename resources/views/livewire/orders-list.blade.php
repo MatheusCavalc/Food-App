@@ -42,9 +42,9 @@
                                             </td>
                                             <td class="py-4 px-6">
                                                 @if ($order->status_delivery == 'Recebido')
-                                                    <button wire:click="toProduction({{ $order->user_id }})" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg  text-white">Em producao</button>
+                                                    <button wire:click="toProduction({{ $order->user_id }})" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg  text-white">Para producao</button>
                                                 @elseif ($order->status_delivery == 'Producao')
-                                                    <button wire:click="toDelivery({{ $order->user_id }})" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg  text-white">Em envio</button>
+                                                    <button wire:click="toDelivery({{ $order->user_id }})" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg  text-white">Para envio</button>
                                                 @else
                                                     Entregue
                                                 @endif

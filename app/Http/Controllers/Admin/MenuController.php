@@ -41,7 +41,7 @@ class MenuController extends Controller
      */
     public function store(MenuStoreRequest $request)
     {
-        $image = $request->file('image')->store('public/categories');
+        $image = $request->file('image')->store('public/menus');
 
         Menu::create([
             'name' => $request->name,
@@ -99,7 +99,7 @@ class MenuController extends Controller
         $image = $menu->image;
         if ($request->hasFile('image')) {
             Storage::delete($menu->image);
-            $image = $request->file('image')->store('public/categories');
+            $image = $request->file('image')->store('public/menus');
         }
 
         $menu->update([

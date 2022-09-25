@@ -59,14 +59,10 @@
                             @enderror
                         </div>
                         <div class="sm:col-span-6 pt-5">
-                            <label for="size" class="block text-sm font-medium text-gray-700">Size</label>
+                            <label for="size" class="block text-sm font-medium text-gray-700">Size (g)</label>
                             <div class="mt-1">
-                                <select id="size" name="size" class="form-multiselect block w-full mt-1 @error('size') border-red-400 @enderror">
-                                        <option value="" selected disabled>Select the size</option>
-                                        <option value="Normal">Normal</option>
-                                        <option value="Big">Big</option>
-                                        <option value="Extra big">Extra Big</option>
-                                </select>
+                                <input type="text" id="size" name="size"
+                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('image') border-red-400 @enderror" />
                             </div>
                             @error('size')
                                 <div class="text-sm text-red-400">{{ $message }}</div>

@@ -31,7 +31,7 @@
                                             Image
                                         </th>
                                         <th scope="col" class="py-3 px-6">
-                                            Size
+                                            Size (g)
                                         </th>
                                         <th scope="col" class="py-3 px-6">
                                             Price
@@ -58,7 +58,7 @@
                                                     class="w-16 h-16 rounded">
                                         </td>
                                         <td class="py-4 px-6">
-                                            {{ $menu->size }}
+                                            {{ $menu->size }}g
                                         </td>
                                         <td class="py-4 px-6">
                                             {{ $menu->price }}

@@ -34,9 +34,6 @@
                         <x-nav-link :href="route('admin.menus.index')" :active="request()->routeIs('admin.menus.index')">
                             {{ __('Cardapio/Menu') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('admin.drinks.index')" :active="request()->routeIs('admin.drinks.index')">
-                            {{ __('Bebidas') }}
-                        </x-nav-link>
                         <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.index')">
                             {{ __('Pedidos') }}
                         </x-nav-link>
