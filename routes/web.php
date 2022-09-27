@@ -2,9 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\DrinkController;
 use App\Http\Controllers\Admin\MenuController;
-use App\Http\Controllers\Admin\RequestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\WelcomeController;
@@ -25,6 +23,8 @@ Route::get('/', [WelcomeController::class, 'index']);
 
 Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
+    Route::get('/to-admin', [AdminController::class, 'toAdminIndex'])->name('user.admin');
+    Route::post('/to-admin', [AdminController::class, 'toAdmin'])->name('to.admin');
     Route::resource('/categories', CategoryController::class);
     Route::resource('/menus', MenuController::class);
     Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
@@ -32,12 +32,8 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::get('/myorders', [OrderController::class, 'myOrders'])->middleware('auth')->name('myorders');
 
 
-
-Route::get('payment-cancel',[PaypalController::class,'cancel'])
-    ->name('payment.cancel');
-Route::get('payment-success',[PaypalController::class,'success'])
-    ->name('payment.success');
-
+Route::get('payment-cancel',[PaypalController::class,'cancel'])->name('payment.cancel');
+Route::get('payment-success',[PaypalController::class,'success'])->name('payment.success');
 
 
 Route::middleware(['auth'])->name('request.')->prefix('request')->group(function () {
