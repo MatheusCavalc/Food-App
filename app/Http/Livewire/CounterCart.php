@@ -7,20 +7,14 @@ use App\Models\Shoppingcart;
 
 class CounterCart extends Component
 {
-    public $total = 0;
-
-    protected $listeners = ['updateCartCount' => 'getCartItemCount'];
+    protected $listeners = ['updateCartCount' => 'render'];
 
     public function render()
     {
-        $this->getCartItemCount();
-
-        return view('livewire.counter-cart');
-    }
-
-    public function getCartItemCount(){
-        $this->total = shoppingcart::whereUserId(auth()->user()->id)
-            ->where('status', '!=', 'success')
-            ->count();
+        return view('livewire.counter-cart', [
+            'total' => Shoppingcart::whereUserId(auth()->user()->id)
+                                ->where('status', '!=', 'success')
+                                ->count(),
+        ]);
     }
 }

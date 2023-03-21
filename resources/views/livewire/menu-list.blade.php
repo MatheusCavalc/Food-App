@@ -18,15 +18,15 @@
                             <div class="max-w-xs mx-4 mb-2 rounded-lg shadow-lg">
                                 <img class="w-full h-48" src="{{ Storage::url($menu->image) }}" alt="Image" />
                                 <div class="px-6 py-4">
-                                    <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 uppercase">
+                                    <h4 class="mb-3 text-xl font-semibold tracking-tight text-green-600 text-center uppercase">
                                         {{ $menu->name }}</h4>
                                     <p class="leading-normal text-gray-700">{{ $menu->description }}.</p>
                                 </div>
                                 <div class="flex items-center justify-between p-4">
                                     <span class="text-xl text-green-600">${{ $menu->price }}</span>
                                 </div>
-                                <div class="flex space-x-2">
-                                    <button wire:click="addToCart({{$menu->id}})" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Pedir</button>
+                                <div class="flex space-x-2 mb-2 ml-3">
+                                    <button wire:click.prevent="addToCart({{$menu->id}})" class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Pedir</button>
                                 </div>
                             </div>
                         @endif

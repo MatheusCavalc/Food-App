@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [WelcomeController::class, 'index']);
+Route::get('/request', [WelcomeController::class, 'requestIndex'])->name('request.index')->middleware('auth');
 
 Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
@@ -35,10 +36,6 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
 Route::get('payment-cancel',[PaypalController::class,'cancel'])->name('payment.cancel');
 Route::get('payment-success',[PaypalController::class,'success'])->name('payment.success');
 
-
-Route::middleware(['auth'])->name('request.')->prefix('request')->group(function () {
-    Route::get('/', [WelcomeController::class, 'requestIndex'])->name('index');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
