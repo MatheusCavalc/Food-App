@@ -13,6 +13,18 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
+    public function orders()
+    {
+        return view('admin.orders.index');
+    }
+
+    public function ordersDetails($orderId)
+    {
+        //dd($orderId);
+
+        return view('admin.orders.details', compact('orderId'));
+    }
+
     public function toAdminIndex()
     {
         return view('admin.toadmin');

@@ -13,7 +13,9 @@
     @include('layouts.flash-message')
     <div class="flex justify-center my-6">
         <div class="flex flex-col w-full p-8 text-gray-800 bg-white shadow-lg pin-r pin-y md:w-4/5 lg:w-4/5">
-            @forelse($cartItems as $item)
+            @if (count($cartItems) == 0)
+                <p class="text-2xl font-bold">Your cart is empty!</p>
+            @else
                 <div class="flex-1">
                     <table class="w-full text-sm lg:text-base" cellspacing="0">
                         <thead>
@@ -29,50 +31,53 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="hidden pb-4 md:table-cell">
-                                    <a href="#">
-                                        <img src="{{ $item->menu->image }}" class="w-20 rounded" alt="Thumbnail" />
-                                    </a>
-                                </td>
-                                <td>
-                                    <p class="mb-2 md:ml-4">{{ $item->menu->name }}</p>
-                                    <button type="submit" class="md:ml-4 text-red-700"
-                                        wire:click="removeItem({{ $item->id }})">
-                                        <small>(Remove item)</small>
-                                    </button>
-                                </td>
-                                <td class="justify-center md:justify-end md:flex mt-6">
-                                    <div class="w-20 h-10">
-                                        <div class="custom-number-input h-10 w-32">
-                                            <div
-                                                class="flex flex-row h-10 w-full rounded-lg relative bg-transparent mt-1">
-                                                <button
-                                                    class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-l cursor-pointer outline-none"
-                                                    wire:click="decrementQty({{ $item->id }})">
-                                                    <span class="m-auto text-2xl font-thin">−</span>
-                                                </button>
-                                                <span class="p-2">{{ $item->quantity }}</span>
-                                                <button
-                                                    class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-20 rounded-r cursor-pointer"
-                                                    wire:click="incrementQty({{ $item->id }})">
-                                                    <span class="m-auto text-2xl font-thin">+</span>
-                                                </button>
+                            @foreach ($cartItems as $item)
+                                <tr>
+                                    <td class="hidden pb-4 md:table-cell">
+                                        <a href="#">
+                                            <img src="{{ Storage::url($item['image']) }}" class="w-20 rounded"
+                                                alt="Thumbnail" />
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <p class="mb-2">{{ $item['name'] }}</p>
+                                        <button type="submit" class="text-red-700"
+                                            wire:click="removeItem({{ $item['id'] }})">
+                                            <small>(Remove item)</small>
+                                        </button>
+                                    </td>
+                                    <td class="justify-center md:justify-end md:flex mt-4">
+                                        <div class="w-20 h-10">
+                                            <div class="custom-number-input h-10 w-32">
+                                                <div
+                                                    class="flex flex-row h-10 w-full rounded-lg relative bg-transparent">
+                                                    <button
+                                                        class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-8 w-8 rounded-l cursor-pointer outline-none"
+                                                        wire:click="decrementQty({{ $item['id'] }})">
+                                                        <span class="m-auto text-2xl font-thin">−</span>
+                                                    </button>
+                                                    <span class="pt-1.5 px-2">{{ $item['qty'] }}</span>
+                                                    <button
+                                                        class="bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-8 w-8 rounded-r cursor-pointer"
+                                                        wire:click="incrementQty({{ $item['id'] }})">
+                                                        <span class="m-auto text-2xl font-thin">+</span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="hidden text-right md:table-cell">
-                                    <span class="text-sm lg:text-base font-medium">
-                                        {{ $item->menu->price }}$
-                                    </span>
-                                </td>
-                                <td class="text-right">
-                                    <span class="text-sm lg:text-base font-medium">
-                                        {{ $item->menu->price * $item->quantity }}$
-                                    </span>
-                                </td>
-                            </tr>
+                                    </td>
+                                    <td class="hidden text-right md:table-cell">
+                                        <span class="text-sm lg:text-base font-medium">
+                                            {{ $item['price'] }}$
+                                        </span>
+                                    </td>
+                                    <td class="text-right">
+                                        <span class="text-sm lg:text-base font-medium">
+                                            {{ $item['price'] * $item['qty'] }}$
+                                        </span>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                     <hr class="pb-6 mt-6" />
@@ -84,7 +89,7 @@
                                 <label for="phone"
                                     class="block mb-2 text-sm lg:text-base text-gray-900 dark:text-gray-300">Phone for
                                     contact</label>
-                                <input wire:model="phone" type="number" id="email"
+                                <input wire:model="phone" type="text" id="email"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required>
                                 @error('phone')
@@ -97,9 +102,26 @@
                                     class="block mb-2 text-sm lg:text-base text-gray-900 dark:text-gray-300">Your
                                     address</label>
                                 <input wire:model="address" type="text" id="password"
+                                    placeholder="Rua, Numero, Bairro"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required>
                                 @error('address')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-6">
+                                <label for="payment_method"
+                                    class="block mb-2 text-sm lg:text-base text-gray-900 dark:text-gray-300">Select Payment Method</label>
+                                <select id="payment_method" wire:model="payment_method"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option disabled>Select Payment Method</option>
+                                    <option value="Money">Money</option>
+                                    <option value="Pix">Pix</option>
+                                    <option value="Credit Card">Credit Card</option>
+                                    <option value="Debit Card">Debit Card</option>
+                                </select>
+                                @error('payment_method')
                                     <span class="error">{{ $message }}</span>
                                 @enderror
                             </div>
@@ -149,14 +171,12 @@
                                     <span class="ml-2 mt-5px">Procceed to checkout</span>
                                 </button>
                                 <div wire:loading>Processing payment....</div>
-
                             </div>
                         </div>
                     </div>
                 </div>
-            @empty
-                <p class="text-2xl font-bold">Your cart is empty!</p>
-            @endforelse
+            @endif
+
         </div>
     </div>
 </div>

@@ -11,10 +11,12 @@ class CounterCart extends Component
 
     public function render()
     {
+        $cart = session()->get('cart');
+
+        $cartItemsTotal = $cart == null ? 0 : array_sum(array_map(fn ($item) => $item['qty'], $cart));
+
         return view('livewire.counter-cart', [
-            'total' => Shoppingcart::whereUserId(auth()->user()->id)
-                                ->where('status', '!=', 'success')
-                                ->count(),
+            'total' => $cartItemsTotal
         ]);
     }
 }

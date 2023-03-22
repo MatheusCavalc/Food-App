@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/request', [WelcomeController::class, 'requestIndex'])->name('request.index')->middleware('auth');
+Route::get('/myorders', [WelcomeController::class, 'myOrders'])->middleware('auth')->name('myorders');
+Route::get('/myorder/{id}', [WelcomeController::class, 'myOrderDetails'])->middleware('auth')->name('order.details');
 
 Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('index');
@@ -28,14 +30,13 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::post('/to-admin', [AdminController::class, 'toAdmin'])->name('to.admin');
     Route::resource('/categories', CategoryController::class);
     Route::resource('/menus', MenuController::class);
-    Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders', [AdminController::class, 'orders'])->name('orders.index');
+    Route::get('/order/{id}', [AdminController::class, 'ordersDetails'])->name('order.details');
 });
-    Route::get('/myorders', [OrderController::class, 'myOrders'])->middleware('auth')->name('myorders');
 
 
 Route::get('payment-cancel',[PaypalController::class,'cancel'])->name('payment.cancel');
 Route::get('payment-success',[PaypalController::class,'success'])->name('payment.success');
-
 
 Route::get('/dashboard', function () {
     return view('dashboard');

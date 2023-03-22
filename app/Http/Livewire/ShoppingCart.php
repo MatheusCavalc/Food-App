@@ -2,31 +2,38 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Order;
 use App\Models\Shoppingcart as Cart;
+use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
 
 class ShoppingCart extends Component
 {
-    public $cartItems, $sub_total = 0, $total = 0, $tax = 0, $phone, $address;
+    public $cartItems, $sub_total = 0, $total = 0, $tax = 0, $phone, $address, $payment_method;
 
     protected $rules = [
+        'payment_method' => 'required',
         'phone' => 'required|min:9',
         'address' => 'required',
     ];
 
     public function render()
     {
-        $this->cartItems = Cart::with('menu')
-                ->where('user_id', auth()->user()->id)
-                ->where('status', '!=', 'success')
-                ->get();
+        $this->cartItems = session()->get('cart');
 
-        $this->total = 0;$this->sub_total = 0; $this->tax = 0;
+        $this->total = 0;
+        $this->sub_total = 0;
+        $this->tax = 0;
 
-        foreach($this->cartItems as $item){
-            $this->sub_total += $item->menu->price * $item->quantity;
+        if ($this->cartItems != null) {
+            foreach ($this->cartItems as $item) {
+                $this->sub_total += $item['price'] * $item['qty'];
+            }
+        } else {
+            $this->cartItems = [];
         }
+
         $this->total = $this->sub_total - $this->tax;
 
         return view('livewire.shopping-cart');
@@ -34,31 +41,37 @@ class ShoppingCart extends Component
 
     public function incrementQty($id)
     {
-        $cart = Cart::whereId($id)->first();
-        $cart->quantity += 1;
-        $cart->save();
+        $cart = Session::get('cart');
 
-        session()->flash('success', 'Menu quantity updated !!!');
+        if (isset($cart[$id]) && $cart[$id]['qty'] < 5) {
+            $cart[$id]['qty'] += 1;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Menu quantity updated !!!');
+        } elseif ($cart[$id]['qty'] = 5) {
+            session()->flash('success', 'Menu cannot exceed 5 units !!!');
+        }
     }
 
     public function decrementQty($id)
     {
-        $cart = Cart::whereId($id)->first();
-        if($cart->quantity > 1){
-            $cart->quantity -= 1;
-            $cart->save();
+        $cart = Session::get('cart');
+
+        if ($cart[$id]['qty'] > 1) {
+            $cart[$id]['qty'] -= 1;
+            session()->put('cart', $cart);
             session()->flash('success', 'Menu quantity updated !!!');
-        }else{
-            session()->flash('info','You cannot have less than 1 quantity');
+        } else {
+            session()->flash('info', 'You cannot have less than 1 quantity');
         }
     }
 
     public function removeItem($id)
     {
-        $cart = Cart::whereId($id)->first();
+        $cart = Session::get('cart');
 
-        if($cart){
-            $cart->delete();
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
             $this->emit('updateCartCount');
         }
         session()->flash('success', 'Menu removed from cart !!!');
@@ -68,41 +81,21 @@ class ShoppingCart extends Component
     {
         $this->validate();
 
-        Cart::with('menu')
-                ->where('user_id', auth()->user()->id)
-                ->where('status', 'pending')
-                ->update(['phone' => $this->phone,
-                          'address' => $this->address]);
+        $data = [
+            'total_price' => $this->total,
+            'menus' => $this->cartItems,
+            'phone' => $this->phone,
+            'address' => $this->address,
+            'payment_method' => $this->payment_method,
+            'created_by' => auth()->user()->id,
+        ];
 
-        $provider = new PayPalClient([]);
-        $token = $provider->getAccessToken();
-        $provider->setAccessToken($token);
+        $order = Order::create($data);
 
-        $order = $provider->createOrder([
-            "intent" => "CAPTURE",
-            "purchase_units" => [
-                [
-                    "amount" => [
-                        "currency_code" => 'USD',
-                        'value'  => $this->total
-                    ]
-                ]
-            ],
-            'application_context' => [
-                'cancel_url' => route('payment.cancel'),
-                'return_url' => route('payment.success')
-            ]
-
-        ]);
-
-        if($order['status'] == 'CREATED'){
-            foreach($this->cartItems as $item){
-                $item->status = 'in_process';
-                $item->payment_id = $order['id'];
-                $item->save();
-            }
-            return redirect($order['links'][1]['href']);
+        if ($order) {
+            session()->forget('cart');
+            return to_route('order.details', ['id' => $order->id]);
         }
-        session()->flash('error','Something went wrong, Please Try again');
+        session()->flash('error', 'Something went wrong, Please Try again');
     }
 }

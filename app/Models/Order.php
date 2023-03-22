@@ -9,15 +9,22 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $fillable = [
+        'total_price',
+        'menus',
+        'phone',
+        'address',
+        'payment_method',
+        'created_by',
+        'status'
+    ];
 
-    public function menu()
-    {
-        return $this->belongsTo(Menu::class);
-    }
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'menus' => 'array',
+    ];
 }
