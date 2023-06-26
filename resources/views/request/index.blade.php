@@ -1,3 +1,3 @@
-<x-guest-layout>
+<x-home-layout>
     <livewire:menu-list />
-</x-guest-layout>
+</x-home-layout>

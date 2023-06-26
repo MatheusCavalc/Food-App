@@ -1,3 +1,3 @@
-<x-guest-layout>
+<x-home-layout>
     @livewire('client-order-details', ['orderId' => $orderId])
-</x-guest-layout>
+</x-home-layout>

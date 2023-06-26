@@ -1,3 +1,3 @@
-<x-guest-layout>
+<x-home-layout>
     <livewire:my-orders />
-</x-guest-layout>
+</x-home-layout>

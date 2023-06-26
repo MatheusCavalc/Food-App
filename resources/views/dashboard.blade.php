@@ -1,3 +1,3 @@
-<x-guest-layout>
+<x-home-layout>
     <livewire:shopping-cart />
-</x-guest-layout>
+</x-home-layout>

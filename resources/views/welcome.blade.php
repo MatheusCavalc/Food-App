@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-home-layout>
     <!-- Main Hero Content -->
     <div class="container max-w-lg px-4 py-32 mx-auto text-left bg-center bg-no-repeat bg-cover md:max-w-none md:text-center"
         style="background-image: url('https://cdn.pixabay.com/photo/2016/11/18/14/39/beans-1834984_960_720.jpg')">
@@ -62,7 +62,7 @@
         </div>
     </section>
     <section class="py-20 bg-gray-50">
-        <div class="container items-center max-w-6xl px-4 px-10 mx-auto sm:px-20 md:px-32 lg:px-16">
+        <div class="container items-center max-w-6xl px-10 mx-auto sm:px-20 md:px-32 lg:px-16">
             <div class="flex flex-wrap items-center -mx-3">
                 <div class="order-1 w-full px-3 lg:w-1/2 lg:order-0">
                     <div class="w-full lg:max-w-md">
@@ -197,4 +197,4 @@
             </div>
         </div>
     </section>
-</x-guest-layout>
+</x-home-layout>
