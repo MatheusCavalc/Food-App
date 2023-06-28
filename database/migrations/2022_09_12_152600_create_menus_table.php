@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('image');
             $table->decimal('price', 10, 2);
+            $table->boolean('on_sale')->default(false);
             $table->timestamps();
         });
     }

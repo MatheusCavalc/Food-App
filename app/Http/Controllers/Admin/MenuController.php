@@ -41,6 +41,8 @@ class MenuController extends Controller
      */
     public function store(MenuStoreRequest $request)
     {
+        $on_sale = $request->on_sale == null ? false : true;
+
         $image = $request->file('image')->store('public/menus');
 
         Menu::create([
@@ -49,7 +51,8 @@ class MenuController extends Controller
             'description' => $request->description,
             'image' => $image,
             'size' => $request->size,
-            'price' => $request->price
+            'price' => $request->price,
+            'on_sale' => $on_sale
         ]);
 
         return to_route('admin.menus.index')->with('success', 'Menu created successfully.');
@@ -87,13 +90,16 @@ class MenuController extends Controller
      */
     public function update(Request $request, Menu $menu)
     {
+        $on_sale = $request->on_sale == null ? false : true;
+
         $request->validate([
             'name' => 'required',
             'category' => 'required',
             'description' => 'required',
             'image' => 'image',
             'size' => 'required',
-            'price' => 'required'
+            'price' => 'required',
+            'on_sale' => 'nullable'
         ]);
 
         $image = $menu->image;
@@ -108,7 +114,8 @@ class MenuController extends Controller
             'description' => $request->description,
             'image' => $image,
             'size' => $request->size,
-            'price' => $request->price
+            'price' => $request->price,
+            'on_sale' => $on_sale
         ]);
 
         return to_route('admin.menus.index')->with('success', 'Menu updated successfully.');

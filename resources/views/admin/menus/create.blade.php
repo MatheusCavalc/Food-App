@@ -78,6 +78,14 @@
                                 <div class="text-sm text-red-400">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="sm:col-span-6 pt-5">
+                            <label for="on_sale" class="inline-flex items-center">
+                                <input id="on_sale" type="checkbox"
+                                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                    name="on_sale">
+                                <span class="ml-2 text-sm text-gray-600">{{ __('On Sale') }}</span>
+                            </label>
+                        </div>
                         <div class="mt-6 p-4">
                             <button type="submit"
                                 class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Store</button>

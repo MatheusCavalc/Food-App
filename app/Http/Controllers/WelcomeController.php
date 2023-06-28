@@ -11,7 +11,7 @@ class WelcomeController extends Controller
 {
     public function index()
     {
-        $menus = Menu::all()->take(4);
+        $menus = Menu::where('on_sale', true)->get();
         return view('welcome', compact('menus'));
     }
 
