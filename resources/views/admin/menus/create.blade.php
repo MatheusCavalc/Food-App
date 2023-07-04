@@ -24,72 +24,75 @@
                             @error('name')
                                 <div class="text-sm text-red-400">{{ $message }}</div>
                             @enderror
-                        <div class="sm:col-span-6 pt-5">
-                            <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
-                            <div class="mt-1">
-                                <select id="category" name="category" class="form-multiselect block w-full mt-1 @error('category') border-red-400 @enderror">
+                            <div class="sm:col-span-6 pt-5">
+                                <label for="category" class="block text-sm font-medium text-gray-700">Category</label>
+                                <div class="mt-1">
+                                    <select id="category" name="category"
+                                        class="form-multiselect block w-full mt-1 @error('category') border-red-400 @enderror">
                                         <option value="" selected disabled>Select the category</option>
-                                    @foreach ($categories as $category)
-                                        <option value="{{ $category->name }}">{{ $category->name }}</option>
-                                    @endforeach
-                                </select>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->name }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('category')
+                                    <div class="text-sm text-red-400">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('category')
-                                <div class="text-sm text-red-400">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="sm:col-span-6 pt-5">
-                            <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                            <div class="mt-1">
-                                <textarea id="description" rows="3" name="description"
-                                    class="shadow-sm focus:ring-indigo-500 appearance-none bg-white border py-2 px-3 text-base leading-normal transition duration-150 ease-in-out focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('description') border-red-400 @enderror"></textarea>
+                            <div class="sm:col-span-6 pt-5">
+                                <label for="description"
+                                    class="block text-sm font-medium text-gray-700">Description</label>
+                                <div class="mt-1">
+                                    <textarea id="description" rows="3" name="description"
+                                        class="shadow-sm focus:ring-indigo-500 appearance-none bg-white border py-2 px-3 text-base leading-normal transition duration-150 ease-in-out focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md @error('description') border-red-400 @enderror"></textarea>
+                                </div>
+                                @error('description')
+                                    <div class="text-sm text-red-400">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('description')
-                                <div class="text-sm text-red-400">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="sm:col-span-6">
-                            <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
-                            <div class="mt-1">
-                                <input type="file" id="image" name="image"
-                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('image') border-red-400 @enderror" />
+                            <div class="sm:col-span-6">
+                                <label for="image" class="block text-sm font-medium text-gray-700"> Image </label>
+                                <div class="mt-1">
+                                    <input type="file" id="image" name="image"
+                                        class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('image') border-red-400 @enderror" />
+                                </div>
+                                @error('image')
+                                    <div class="text-sm text-red-400">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('image')
-                                <div class="text-sm text-red-400">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="sm:col-span-6 pt-5">
-                            <label for="size" class="block text-sm font-medium text-gray-700">Size (g)</label>
-                            <div class="mt-1">
-                                <input type="text" id="size" name="size"
-                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('image') border-red-400 @enderror" />
+                            <div class="sm:col-span-6 pt-5">
+                                <label for="size" class="block text-sm font-medium text-gray-700">Size (g)</label>
+                                <div class="mt-1">
+                                    <input type="text" id="size" name="size"
+                                        class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('image') border-red-400 @enderror" />
+                                </div>
+                                @error('size')
+                                    <div class="text-sm text-red-400">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('size')
-                                <div class="text-sm text-red-400">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="sm:col-span-6 pt-5">
-                            <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                            <div class="mt-1">
-                                <input type="number" min="0.00" max="10000.00" step="0.01" id="price" name="price"
-                                    class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('price') border-red-400 @enderror" />
+                            <div class="sm:col-span-6 pt-5">
+                                <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                                <div class="mt-1">
+                                    <input type="number" min="0.00" max="10000.00" step="0.01" id="price"
+                                        name="price"
+                                        class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5 @error('price') border-red-400 @enderror" />
+                                </div>
+                                @error('price')
+                                    <div class="text-sm text-red-400">{{ $message }}</div>
+                                @enderror
                             </div>
-                            @error('price')
-                                <div class="text-sm text-red-400">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="sm:col-span-6 pt-5">
-                            <label for="on_sale" class="inline-flex items-center">
-                                <input id="on_sale" type="checkbox"
-                                    class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                    name="on_sale">
-                                <span class="ml-2 text-sm text-gray-600">{{ __('On Sale') }}</span>
-                            </label>
-                        </div>
-                        <div class="mt-6 p-4">
-                            <button type="submit"
-                                class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Store</button>
-                        </div>
+                            <div class="sm:col-span-6 pt-5">
+                                <label for="on_sale" class="inline-flex items-center">
+                                    <input id="on_sale" type="checkbox"
+                                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+                                        name="on_sale">
+                                    <span class="ml-2 text-sm text-gray-600">{{ __('On Sale') }}</span>
+                                </label>
+                            </div>
+                            <div class="mt-6 p-4">
+                                <button type="submit"
+                                    class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">Store</button>
+                            </div>
                     </form>
                 </div>
 

@@ -90,7 +90,8 @@
                                 <label for="on_sale" class="inline-flex items-center">
                                     <input id="on_sale" type="checkbox"
                                         class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                        name="on_sale" value="{{ $menu->on_sale }}" @php if ($menu->on_sale) echo 'checked' @endphp>
+                                        name="on_sale" value="{{ $menu->on_sale }}"
+                                        @php if ($menu->on_sale) echo 'checked' @endphp>
                                     <span class="ml-2 text-sm text-gray-600">{{ __('On Sale') }}</span>
                                 </label>
                             </div>

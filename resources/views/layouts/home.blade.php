@@ -43,36 +43,37 @@
             </div>
 
             <!-- Mobile Menu open: "block", Menu closed: "hidden" -->
-            <div :class="isOpen ? 'flex' : 'hidden'" class="flex-col mt-8 space-y-4 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0">
-                    <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-                        href="/">Home</a>
-                    <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-                        href="{{ route('request.index') }}">Our Menu</a>
+            <div :class="isOpen ? 'flex' : 'hidden'"
+                class="flex-col mt-8 space-y-4 md:flex md:space-y-0 md:flex-row md:items-center md:space-x-10 md:mt-0">
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                    href="/">Home</a>
+                <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                    href="{{ route('request.index') }}">Our Menu</a>
                 @if (Route::has('login'))
                     @auth
 
-                    @if (auth()->user()->admin)
-                        <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-                            href="{{ route('admin.index') }}">Admin</a>
-                    @endif
-
-                    @livewire('counter-cart')
-
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-                        href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                        this.closest('form').submit();">
-                            Logout
-                        </a>
-                    </form>
-                @else
+                        @if (auth()->user()->admin)
                             <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-                                href="{{ route('admin.index') }}">Login</a>
+                                href="{{ route('admin.index') }}">Admin</a>
+                        @endif
+
+                        @livewire('counter-cart')
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                                href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                        this.closest('form').submit();">
+                                Logout
+                            </a>
+                        </form>
+                    @else
+                        <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
+                            href="{{ route('admin.index') }}">Login</a>
                         @if (Route::has('register'))
                             <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
-                            href="{{ route('register') }}">Register</a>
+                                href="{{ route('register') }}">Register</a>
                         @endif
                     @endauth
                 @endif
@@ -112,7 +113,8 @@
                 <a class="ml-3">
                     <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" class="w-6 h-6 text-pink-400" viewBox="0 0 24 24">
-                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5">
+                        </rect>
                         <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                     </svg>
                 </a>
@@ -129,7 +131,7 @@
         </div>
     </footer>
     @livewireScripts
-    </body>
+</body>
 
 
 
@@ -137,17 +139,18 @@
 
 
 
-    <!--                @if (Route::has('login'))
+<!--                @if (Route::has('login'))
                     <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
                             @auth
-                            <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Meus Pedidos</a>
-                        @else
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Meus Pedidos</a>
+@else
+    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                            @endif
+                                @if (Route::has('register'))
+    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+    @endif
                             @endauth
                     </div>
                         @endif -->
+
 </html>
