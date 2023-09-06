@@ -36,7 +36,7 @@ class ShoppingCart extends Component
 
         $this->total = $this->sub_total - $this->tax;
 
-        return view('livewire.shopping-cart');
+        return view('livewire.shopping-cart')->layout('layouts.home');
     }
 
     public function incrementQty($id)
@@ -94,8 +94,12 @@ class ShoppingCart extends Component
 
         if ($order) {
             session()->forget('cart');
+            $status = '';
+            $this->emit('statusUpdate', $status);
+
             return to_route('order.details', ['id' => $order->id]);
         }
+
         session()->flash('error', 'Something went wrong, Please Try again');
     }
 }

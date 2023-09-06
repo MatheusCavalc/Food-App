@@ -14,6 +14,6 @@ class MyOrders extends Component
     {
         $myOrders = Order::where('created_by', auth()->user()->id)->orderBy('id', 'desc')->get();
 
-        return view('livewire.my-orders', compact('myOrders'));
+        return view('livewire.my-orders', compact('myOrders'))->layout('layouts.home');
     }
 }

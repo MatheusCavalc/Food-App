@@ -9,11 +9,23 @@ class OrderDetails extends Component
 {
     public $orderId;
 
+    public Order $order;
+
+    public function mount($id)
+    {
+        $this->orderId = $id;
+        $this->order = Order::where('id', $id)->first();
+    }
+
+    public function orderAtt()
+    {
+        $this->order = Order::where('id', $this->orderId)->first();
+    }
+
     public function render()
     {
-        $order = Order::where('id', $this->orderId)->first();
-
-        return view('livewire.order-details', compact('order'));
+        $this->orderAtt();
+        return view('livewire.order-details')->layout('layouts.admin');
     }
 
     public function received($id)

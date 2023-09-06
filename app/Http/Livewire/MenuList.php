@@ -16,12 +16,13 @@ class MenuList extends Component
         $menus = Menu::all();
         $categories = Category::all();
 
-        return view('livewire.menu-list', compact('menus', 'categories'));
+        return view('livewire.menu-list', compact('menus', 'categories'))
+            ->layout('layouts.home');
     }
 
     public function addToCart($id, $qty)
     {
-        if(auth()->user()) {
+        if (auth()->user()) {
 
             $cart = session()->get('cart');
 
@@ -46,7 +47,7 @@ class MenuList extends Component
 
                 $this->emit('updateCartCount');
 
-                session()->flash('success','Product added to the cart successfully');
+                session()->flash('success', 'Product added to the cart successfully');
             }
 
             if (isset($cart)) {
@@ -62,9 +63,8 @@ class MenuList extends Component
 
                 $this->emit('updateCartCount');
 
-                session()->flash('success','Product added to the cart successfully');
+                session()->flash('success', 'Product added to the cart successfully');
             }
-
         } else {
             return redirect(route('login'));
         }
