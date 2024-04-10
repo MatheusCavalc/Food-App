@@ -47,7 +47,7 @@ class MenuList extends Component
 
                 $this->emit('updateCartCount');
 
-                session()->flash('success', 'Product added to the cart successfully');
+                session()->flash('success', 'Menu added to the cart');
             }
 
             if (isset($cart)) {
@@ -63,7 +63,7 @@ class MenuList extends Component
 
                 $this->emit('updateCartCount');
 
-                session()->flash('success', 'Product added to the cart successfully');
+                session()->flash('success', 'Menu added to the cart');
             }
         } else {
             return redirect(route('login'));

@@ -22,7 +22,7 @@
 
 <body>
     <div class="bg-white shadow-md" x-data="{ isOpen: false }">
-        <nav class="container px-6 py-8 mx-auto md:flex md:justify-between md:items-center">
+        <nav class="container px-6 py-6 mx-auto md:flex md:justify-between md:items-center">
             <div class="flex items-center justify-between">
                 <a class="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 md:text-2xl hover:text-green-400"
                     href="/">
@@ -57,8 +57,6 @@
                                 href="{{ route('admin.index') }}">Admin</a>
                         @endif
 
-                        @livewire('counter-cart')
-
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <a class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-blue-500 hover:text-green-400"
@@ -80,9 +78,11 @@
 
 
             </div>
+
+            @livewire('counter-cart')
         </nav>
     </div>
-    <div class="font-sans text-gray-900 antialiased min-h-screen">
+    <div class="min-h-screen font-sans antialiased text-gray-900">
         {{ $slot }}
     </div>
     <footer class="bg-gray-800 border-t border-gray-200">
@@ -140,14 +140,14 @@
 
 
 <!--                @if (Route::has('login'))
-                    <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
+                    <div class="fixed top-0 right-0 hidden px-6 py-4 sm:block">
                             @auth
-                                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Meus Pedidos</a>
+                                <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline dark:text-gray-500">Meus Pedidos</a>
 @else
-    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+    <a href="{{ route('login') }}" class="text-sm text-gray-700 underline dark:text-gray-500">Log in</a>
 
                                 @if (Route::has('register'))
-    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline dark:text-gray-500">Register</a>
     @endif
                             @endauth
                     </div>
