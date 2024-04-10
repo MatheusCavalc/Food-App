@@ -21,7 +21,7 @@ php artisan key:generate
 ```shell
 ./vendor/bin/sail up -d
 ```
-- Execute o comando abaixo para popular o banco de dados com as tabelas necessarias para a aplicacao:
+- Execute o comando abaixo para popular o banco de dados com as tabelas necessárias para a aplicação:
 ```shell
 ./vendor/bin/sail artisan migrate
 ```
@@ -29,7 +29,7 @@ php artisan key:generate
 ```shell
 ./vendor/bin/sail npm install
 ```
-- Para compilar os arquivos da aplicacao:
+- Para compilar os arquivos da aplicação:
 ```shell
 ./vendor/bin/sail npm run build
 ```
